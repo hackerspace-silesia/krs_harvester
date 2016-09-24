@@ -1,0 +1,36 @@
+{
+  "name": "krs_harvester",
+  "version": "1.0.0",
+  "description": "for hackaton",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hackerspace-silesia/krs_harvester.git"
+  },
+  "keywords": [
+    "hackaton"
+  ],
+  "author": "noemiko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hackerspace-silesia/krs_harvester/issues"
+  },
+  "homepage": "https://github.com/hackerspace-silesia/krs_harvester#readme",
+  "dependencies": {
+    "chart.js": "^2.3.0"
+  },
+  "devDependencies": {
+    "connect": "^2.14.4",
+    "connect-livereload": "^0.5.3",
+    "gulp": "^3.9.1",
+    "gulp-livereload": "^3.8.1",
+    "opn": "^1.0.1",
+    "vinyl-fs": "^2.2.1",
+    "browser-sync": "^2.16.0",
+    "gulp-connect": "^5.0.0",
+    "gulp-install": "^0.6.0"
+  }
+}
