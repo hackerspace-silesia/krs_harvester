@@ -11,8 +11,8 @@ class Donator(models.Model):
 
 class Donation(models.Model):
     id = models.UUIDField(primary_key=True)
-    donator = models.ForeignKey(Donator)
-    organization = models.ForeignKey(Organization)
+    donator = models.ForeignKey(Donator, related_name='donations')
+    organization = models.ForeignKey(Organization, related_name='donations')
     name = models.CharField(max_length=150)
     money = models.DecimalField(max_digits=12, decimal_places=2)
     date = models.DateField()

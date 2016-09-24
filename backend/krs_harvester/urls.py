@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from krs_harvester.routers import router
+
+# Create your views here.
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-]
+] + router.urls
