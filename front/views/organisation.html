@@ -3,7 +3,55 @@
     <h3><div class="moneySum"><span>557563428<span>zł</div> tyle dotacji otrzymała organizacja 
     <span id="organisationName"> "Pan Marek Pomaga Dzieciom"</span>
     </h3>
-<div class="container">
-<div class="tile"></div>
+<div class="row">
+
+<div class="my-chart col-lg-4 col-sm-12 ">
+	<canvas style="height:40px;" id="line" class="chart chart-line" chart-data="data"
+	chart-labels="labels" chart-series="series" chart-options="options"
+	chart-dataset-override="datasetOverride" chart-click="onClick">
+	</canvas> 
 </div>
+<div class="col-lg-4 col-sm-12">
+<table class="table table-bordered table-responsive"> 
+<thead> 
+<tr> 
+<th>Organizacja dotująca</th> 
+<th>2005</th> 
+<th>2006</th>
+ <th>2007</th> 
+ <th>2008</th> 
+ <th>2009</th> 
+
+ </tr> 
+ </thead> 
+ <tbody> 
+
+ <tr ng-click="setSelected(24234,234234,13123,123123,4534)" ng-class="{info: 1 === 1}"> 
+ <th scope="row">Marek Kocha dzieci i ciastka</th> 
+ 
+ <td>24234</td> 
+ <td>234234</td>
+  <td>13123</td> 
+  <td>123123</td> 
+  <td>35434534</td> </tr> 
+
+  <tr ng-click="setSelected(24234,1233,13123,123123,4534)"> 
+  <th scope="row">Marcin jest w kiślu</th>
+ <td>24234</td> 
+ <td>234234</td>
+  <td>13123</td> 
+  <td>123123</td> 
+  <td>35434534</td>  </tr> 
+  <tr ng-click="setSelected(12313,234234,13123,123123,4534)" > 
+  <th scope="row">Suma</th> <td>24234</td> 
+ <td>234234</td>
+  <td>13123</td> 
+  <td>123123</td> 
+  <td>35434534</td>   </tr> </tbody> </table> 
+  </div>
+  </div>
+<div>
+</div>
+
+
 </div>

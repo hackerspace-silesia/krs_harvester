@@ -1,12 +1,12 @@
-angular.module('app', ['Tracks','ngRoute']).
+angular.module('app', ['Charts','ngRoute']).
 config(function ($routeProvider) 
 {
-	$routeProvider.when('/trasy', {
-		templateUrl: 'views/main.html', controller: 'TracksController'});
+	$routeProvider.when('/main', {
+		templateUrl: 'views/main.html'});
 	$routeProvider.when('/organisation', {
-		templateUrl: 'views/organisation.html', controller: 'TracksController'});
+		templateUrl: 'views/organisation.html', controller:'LineCtrl'});
 	$routeProvider.otherwise({
-	redirectTo: '/trasy'
+	redirectTo: '/main'
 	});
 });
-angular.module('Tracks', []);
+angular.module('Charts', []);

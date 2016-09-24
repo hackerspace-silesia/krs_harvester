@@ -19,6 +19,16 @@
       font-weight: 400;
       margin-bottom: 30px;
   }
+  canvas{
+  	height: 100%;
+  }
+  .table-container{
+  	width:100%;
+  }
+  .my-chart {
+width: 700px;
+height: 400px;
+}
   .moneySum{
   	font-size: 80px;
   }
