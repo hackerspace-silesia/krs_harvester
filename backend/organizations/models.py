@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Organization(models.Model):
-    pk = models.UUIDField(primary_key=True)
+    id = models.UUIDField(primary_key=True)
     name = models.CharField(max_length=150)
     krs = models.IntegerField()
     address = models.CharField(max_length=300)
