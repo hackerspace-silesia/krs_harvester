@@ -6,26 +6,28 @@ URL = 'https://api-v3.mojepanstwo.pl/dane/krs_podmioty.json'
 
 class Command(BaseCommand):
 
-    def get_chunk_data(self, url=None):
+    def get_chunk_data(self, url=None, session=None):
         """
          :return: tuple of list of objects and next url
          :rtype: (list, (str|None))
         """
+        session = session and requests.Session()
         if url is None:
-            req = requests.get(URL, params={
+            req = session.get(URL, params={
                 'conditions[krs_podmioty.forma_prawna_typ_id]': '2',
                 'limit': 1000,
             })
         else:
-            req = requests.get(url)
+            req = session.get(url)
         req.raise_for_status()
         data = req.json()
         return data['Dataobject'], data['Links'].get('next')
 
     def get_data(self):
         url = None
+        session = requests.Session()
         while True:
-            data, url = self.get_chunk_data(url)
+            data, url = self.get_chunk_data(url, session)
             for single_data in data:
                 yield single_data['data']
             self.stdout.write('.', ending='')
