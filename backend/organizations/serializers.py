@@ -10,9 +10,11 @@ class OrganizationSerializer(serializers.ModelSerializer):
         model = Organization
         fields = (
             'pk', 'name', 'krs', 'address', 'zip_code',
-            'city', 'lagitude', 'longtidue',
+            'city', 'latitude', 'longitude',
         )
 
 
 class OrganizationDetailSerializer(OrganizationSerializer):
     donations = DonationSerializer(many=True)
+    class Meta(OrganizationSerializer.Meta):
+        fields = OrganizationSerializer.Meta.fields + ('donations',)

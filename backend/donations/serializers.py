@@ -18,4 +18,4 @@ class DonationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Donation
-        fields = ('name', 'money', 'donator_name', 'donator')
+        fields = ('name', 'money', 'organization', 'donator')
