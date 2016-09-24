@@ -1,3 +1,4 @@
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from organizations.models import Organization
 from organizations.serializers import (
@@ -8,6 +9,7 @@ from organizations.serializers import (
 
 class OrganizationViewSet(ReadOnlyModelViewSet):
     queryset = Organization.objects
+    pagination_class = LimitOffsetPagination
 
     def get_serializer_class(self, *args, **kwargs):
         if 'pk' in self.kwargs:

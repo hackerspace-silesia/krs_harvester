@@ -25,7 +25,7 @@ class Command(BaseCommand):
         req.raise_for_status()
         data = req.json()
         return [
-            (d['id'], int(d['name'][-7:-3]))
+            (d['id'], int(d['name'][-7:-3]) + 1)
             for d in data['result']['resources']
             if d['name'].lower().startswith('wykaz opp')
         ]
@@ -52,8 +52,8 @@ class Command(BaseCommand):
         session = requests.Session()
         while True:
             data, url = self.get_chunk_data(report_id, url, session)
-            if data is None:
-                break
+            if len(data) == 0:
+                return
             for single_data in data:
                 yield single_data
             self.stdout.write('.', ending='')
@@ -68,36 +68,62 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         donator, _ = Donator.objects.get_or_create(name='1%')
         for data, year in self.get_data_from_reports():
-            organization_kwargs = dict(
-                name=data[u'Nazwa organizacji pożytku publicznego'],
-                krs=data['Numer \nKRS']  # boze kto daje nowa linijke w nazwie pola?
-            )
-
-            org = Organization.objects.filter(
-                krs=organization_kwargs['krs']
-            ).first()
-            if org is None:
-                org = Organization.objects.create(**organization_kwargs)
-
-            kwargs = dict(
-                name='1%% PIT',
-                money=data[u'Kwota w zł'],
-                donator=donator,
-                organization=org,
-                date=date(year, 1, 1),
-                with_day=False,
-                with_month=False,
-            )
-            don_query = Donation.objects.filter(
-                name=kwargs['name'],
-                date=kwargs['date'],
-                donator=donator,
-                organization=org,
-            )
-
-            if don_query.count() == 0:
-                Donation.objects.create(**kwargs)
-            else:
-                don_query.update(**kwargs)
+            try:
+                self.add_donation(donator, data, year)
+            except:
+                self.stderr.write('Error! year: {} data: {}'.format(
+                    year, data
+                ))
+                raise
 
         self.stdout.write('\nDone')
+
+    @staticmethod
+    def get_guess_key(data, keys):
+        for key in keys:
+            try:
+                return data[key]
+            except KeyError:
+                continue
+        else:
+            raise KeyError(', '.join(keys))
+
+    def add_donation(self, donator, data, year):
+        if data['L.p.'] is None:
+            return  # omg
+
+        organization_kwargs = dict(
+            name=data[u'Nazwa organizacji pożytku publicznego'],
+            krs=self.get_guess_key(data, [
+                'Numer \nKRS',  # boze kto daje nowa linijke w nazwie pola?
+                'Numer KRS',
+                'Numer',
+            ]),
+        )
+
+        org = Organization.objects.filter(
+            krs=organization_kwargs['krs']
+        ).first()
+        if org is None:
+            org = Organization.objects.create(**organization_kwargs)
+
+        kwargs = dict(
+            name='1% PIT',
+            money=data[u'Kwota w zł'],
+            donator=donator,
+            organization=org,
+            date=date(year, 1, 1),
+            with_day=False,
+            with_month=False,
+        )
+        don_query = Donation.objects.filter(
+            name=kwargs['name'],
+            date=kwargs['date'],
+            donator=donator,
+            organization=org,
+        )
+
+        if don_query.count() == 0:
+            Donation.objects.create(**kwargs)
+        else:
+            don_query.update(**kwargs)
