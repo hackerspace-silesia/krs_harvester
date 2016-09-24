@@ -9,7 +9,8 @@ class OrganizationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organization
         fields = (
-            'pk', 'name', 'krs', 'address', 'zip_code',
+            'pk', 'name', 'krs', 'street', 'zip_code',
+            'wojewodztwo', 'powiat', 'gmina',
             'city', 'latitude', 'longitude',
         )
 
