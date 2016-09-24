@@ -8,8 +8,7 @@ from organizations.serializers import (
 
 
 class OrganizationViewSet(ReadOnlyModelViewSet):
-    queryset = Organization.objects
-    pagination_class = LimitOffsetPagination
+    queryset = Organization.objects.all()
 
     def get_serializer_class(self, *args, **kwargs):
         if 'pk' in self.kwargs:

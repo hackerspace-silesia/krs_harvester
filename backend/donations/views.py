@@ -7,4 +7,3 @@ from donations.serializers import DonatorSerializer
 class DonatorViewSet(ReadOnlyModelViewSet):
     queryset = Donator.objects
     serializer_class = DonatorSerializer
-    pagination_class = LimitOffsetPagination
