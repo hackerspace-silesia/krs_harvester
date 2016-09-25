@@ -24,6 +24,9 @@ class DonationSerializer(serializers.ModelSerializer):
 class DonationAggSerializer(serializers.Serializer):
     sum_money = serializers.DecimalField(max_digits=12, decimal_places=2)
     avg_money = serializers.DecimalField(max_digits=12, decimal_places=2)
+    min_money = serializers.DecimalField(max_digits=12, decimal_places=2)
+    max_money = serializers.DecimalField(max_digits=12, decimal_places=2)
+    count_donations = serializers.IntegerField()
     wojewodztwo = serializers.IntegerField()
     date = serializers.DateField()
     powiat = serializers.IntegerField()
