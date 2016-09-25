@@ -26,6 +26,6 @@ class Organization(models.Model):
         return self.name
 
 
-class Keywords(models.Model):
+class Keyword(models.Model):
     name = models.CharField(max_length=50)
     organization = models.ForeignKey(Organization)
