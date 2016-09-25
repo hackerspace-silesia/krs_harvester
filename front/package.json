@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/hackerspace-silesia/krs_harvester#readme",
   "dependencies": {
+    "angular-datamaps": "^0.1.2",
     "chart.js": "^2.3.0"
   },
   "devDependencies": {
