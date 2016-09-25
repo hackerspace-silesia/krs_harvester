@@ -19,3 +19,23 @@ class DonationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Donation
         fields = ('name', 'money', 'organization', 'donator')
+
+
+class DonationAggSerializer(serializers.Serializer):
+    sum_money = serializers.DecimalField(max_digits=12, decimal_places=2)
+    avg_money = serializers.DecimalField(max_digits=12, decimal_places=2)
+    wojewodztwo = serializers.IntegerField()
+    date = serializers.DateField()
+    powiat = serializers.IntegerField()
+    gmina = serializers.IntegerField()
+    city = serializers.CharField()
+
+    def __init__(self, *args, **kwargs):
+        fields = kwargs.pop('fields', None)
+        super(DonationAggSerializer, self).__init__(*args, **kwargs)
+
+        if fields is not None:
+            allowed = set(fields)
+            existing = set(self.fields.keys())
+            for field_name in existing - allowed:
+                self.fields.pop(field_name)
