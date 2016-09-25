@@ -103,9 +103,10 @@ angular.module('Data')
 
 	getId = function(name){
 		let organizationTest = organizations.organizationsTestDataArray;
-
-		for(let i =1;i<10;i++){
-			if(organizationTest[i].name=name)
+			
+		for(let i =0;i<10;i++){
+			console.log(organizationTest[i]);
+			if(organizationTest[i].name==name)
 			{
 				return organizationTest[i].id;
 			}
