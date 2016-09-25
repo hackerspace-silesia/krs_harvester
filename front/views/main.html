@@ -1,10 +1,17 @@
-<div class="text-center">
+<div class="text-center" ng-controller="DataCtrl as data">
   
-    <h3><div class="moneySum"><span>557563428<span>zł</div> tyle dotacji otrzymały organizacje pozarządowe w 2015
+    <h3><div class="moneySum"><span>{{data.sum}}<span>zł</div> tyle dotacji otrzymały organizacje pozarządowe w 2015
     </h3>
-<h2>Sprawdź jedną z nich:</h2>
-    <input type="email" id="organisation-name" class="form-control"  placeholder="nazwa organizacji">
-     <a href="#/organisation"> <button type="button"  class="btn btn-warning btn-block">Szukaj1</button></a>
+    <h2>Sprawdź jedną z nich: </h2>
+    <input  list="organisation-name" class="form-control"  placeholder="nazwa organizacji">
+     <a href="#/organisation/{{selected_name}}"> 
+
+     	<datalist id="organisation-name">
+		  <option ng-init=selected_name=organization.name ng-repeat="organization in data.organizationsTestDataArray" value = {{organization.name}}></option>
+</datalist>
+
+     <button type="button"  class="btn btn-warning btn-block">Szukaj
+     </button></a>
 
 
 <div class="row">

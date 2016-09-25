@@ -1,4 +1,9 @@
-angular.module('Charts', ["chart.js"]).controller("LineCtrl", function ($scope) {
+angular.module('Data', ['chart.js'])
+.controller("LineCtrl", function ($scope, $routeParams,organizationsData) {
+
+
+
+
 
   $scope.labels = ["2000", "2001", "2002", "2003", "2004"];
   $scope.series = ['Kwota(zł)'];
@@ -6,9 +11,6 @@ angular.module('Charts', ["chart.js"]).controller("LineCtrl", function ($scope) 
     [65, 59, 80, 81, 56]
 
   ];
-  $scope.onClick = function (points, evt) {
-    console.log(points, evt);
-  };
 
     $scope.setSelected = function (a,b,c,d,e) {
     changeData(a,b,c,d,e);
@@ -39,8 +41,41 @@ elements: { line: {tension: 0} },
   };
 });
       
-angular.module('Charts')
+angular.module('Data')
   .controller('ChartsController', [ 'chart.js',function ( $http) 
 {		
+}]);
+
+  angular.module('Data')
+  .controller('DataCtrl',['organizationsData',function ( organizationsData) 
+{	this.sum="557 563 428";
+	this.organizationsTestDataArray = {};
+
+	var organizations=this;
+  	var init = function () 
+	{
+		getData();
+		console.log(organizations.organizationsTestDataArray);
+	};
+
+	var getData = function(){
+		organizationsData.getData().then(function(data)	
+	    {	let organizationData = {};
+	      	for(let i=1;i<11;i++){
+	      		let id = data[i].pk;
+	   
+	      		organizationData[id]={'name':{}};
+	      		organizationData[id]['name']=data[i].name;
+	      	}
+	      
+	      		organizations.organizationsTestDataArray = organizationData;
+	     
+	    });
+
+	}
+
+	init();	
+
+
 }]);
         
