@@ -24,3 +24,8 @@ class Organization(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class Keywords(models.Model):
+    name = models.CharField(max_length=50)
+    organization = models.ForeignKey(Organization)
