@@ -33,7 +33,7 @@ line.organizationNameId={};
 	    });
 
 	};
-
+	getDataOrganisations();
 	var getName = function(){
 		let organizationTest = line.organizationNameId;
 
