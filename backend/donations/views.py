@@ -89,8 +89,7 @@ class DonationAggViewSet(ListModelMixin, GenericViewSet):
             if name not in self.NON_F_FIELDS
         }
         return (
-            super(DonationAggViewSet, self)
-            .get_queryset()
+            super(DonationAggViewSet, self).get_queryset()
             .annotate(**aliased_fields)
             .values(*annotate_fields.keys())
             .annotate(**self.AGG_FIELDS)
@@ -102,3 +101,13 @@ class DonationAggViewSet(ListModelMixin, GenericViewSet):
         kwargs = kwargs.copy()
         kwargs['fields'] = self.get_group_fields().keys() + self.AGG_FIELDS.keys()
         return super(DonationAggViewSet, self).get_serializer(*args, **kwargs)
+
+
+class DonationTotalAggViewSet(DonationAggViewSet):
+
+    def get_queryset(self):
+        return [
+            super(DonationTotalAggViewSet, self).get_queryset()
+            .filter(**self.get_filter_fields())
+            .aggregate(**self.AGG_FIELDS)
+        ]
