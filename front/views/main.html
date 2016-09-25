@@ -3,13 +3,14 @@
     <h3><div class="moneySum"><span>{{data.sum}}<span>zł</div> tyle dotacji otrzymały organizacje pozarządowe w 2015
     </h3>
     <h2>Sprawdź jedną z nich: </h2>
-    <input  list="organisation-name" class="form-control"  placeholder="nazwa organizacji">
-     <a href="#/organisation/{{selected_name}}"> 
-
-     	<datalist id="organisation-name">
-		  <option ng-init=selected_name=organization.name ng-repeat="organization in data.organizationsTestDataArray" value = {{organization.name}}></option>
+    <input  list="organisation-name" ng-model="selected" ng-change="data.changePath(selected)" class="form-control"  placeholder="nazwa organizacji">
+     	<datalist id="organisation-name" >
+		  <option 
+		  		  ng-repeat="organization in data.organizationsTestDataArray" 
+		  		  value = {{organization.name}}>
+		  </option>
 </datalist>
-
+<a href="#/organisation/"+{{organization.name}}> 
      <button type="button"  class="btn btn-warning btn-block">Szukaj
      </button></a>
 

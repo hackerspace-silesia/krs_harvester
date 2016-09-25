@@ -4,7 +4,7 @@ app.config(function ($routeProvider)
 	$routeProvider.when('/main', {
 		templateUrl: 'views/main.html'});
 	$routeProvider.when('/organisation/:name', {
-		templateUrl: 'views/organisation.html', controller:"LineCtrl"});
+		templateUrl: 'views/organisation.html'});
 	$routeProvider.otherwise({
 	redirectTo: '/main'
 	});
