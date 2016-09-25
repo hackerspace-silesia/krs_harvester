@@ -2,7 +2,7 @@ angular.module('Data', ['chart.js'])
 .controller("LineCtrl", function ($scope, $routeParams,organizationsData) {
 var line = this;
 $scope.actualId = $routeParams.name;
-console.log(line.actualId);
+
 $scope.actualName;
 		
 line.organizationNameId={};
@@ -17,17 +17,10 @@ line.organizationNameId={};
     $scope.setSelected = function (a,b,c,d,e) {
     changeData(a,b,c,d,e);
   };
-
-  var init = function()
-  {
-
-  	getDataOrganisations();
-  	console.log($scope.actualName);
-  };
   
 
   var getDataOrganisations = function(){
-		organizationsData.getData().then(function(data)	
+		organizationsData.getDataCompareToPartOfName().then(function(data)	
 	    {	let organizationData = {};
 	      	for(let i=1;i<11;i++){
 	      		let id = data[i].pk;
@@ -43,8 +36,10 @@ line.organizationNameId={};
 
 	var getName = function(){
 		let organizationTest = line.organizationNameId;
-console.log(organizationTest);
+
 		for(let i =1;i<10;i++){
+
+
 			if(organizationTest[i].id=$scope.actualId)
 			{	console.log(organizationTest[i].name);
 				return organizationTest[i].name;
@@ -54,12 +49,12 @@ console.log(organizationTest);
 
 	}
 
+
   function changeData(a,b,c,d,e){
 		let data = [a,b,c,d,e];
 		$scope.data = data;
   }
 
-  init();
 
   $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }];
   $scope.options = {
@@ -80,6 +75,8 @@ elements: { line: {tension: 0} },
     }
   };
 });
+
+
       
 angular.module('Data')
   .controller('ChartsController', [ 'chart.js',function ( $http) 
@@ -93,11 +90,12 @@ angular.module('Data')
 
 	organizations.sum="557 563 428";
 	organizations.organizationsTestDataArray = {};
-	organizations.selected;
+	organizations.writings;
 
-	organizations.changePath=function(name){
 
-		let id = getId(name);
+	organizations.showOrganizationData=function(){
+
+		let id = getId(organizations.writings);
 
 		$location.path('#/organisation/'+id+'/');
 		$window.location.assign('#/organisation/'+id+'/');
@@ -129,28 +127,33 @@ angular.module('Data')
 
 	}
 
-  	var init = function () 
-	{	
-		getData();
-	};
-
-	var getData = function(){
-		organizationsData.getData().then(function(data)	
-	    {	let organizationData = {};
-	      	for(let i=1;i<11;i++){
-	      		let id = data[i].pk;
-	      		organizationData[i]={'name':{}};
-	      		organizationData[i]['name']=data[i].name;
-	      		organizationData[i]['id']=id;
-	      	}
-	      
-	      		organizations.organizationsTestDataArray = organizationData;
-	     		organizations.selected=organizationData[0];
+	organizations.getData = function(partOfName){
+		organizationsData.getDataCompareToPartOfName(partOfName).then(function(data)	
+	    {	    		console.log(partOfName);
+	    		getNamePropositionsOrganization(data);    		
 	    });
-
 	}
 
-	init();	
+	var getNamePropositionsOrganization = function (arrayOfObjectOrganisations)
+	{	
+		let data = arrayOfObjectOrganisations;
+		let organizationData = {};
+	
+	      	for(let i=0;i<10;i++){
+	      		if(typeof data[i] =='object')
+	      		{
+		      		let id = data[i].pk;
+		      		organizationData[i]={'name':{}};
+		      		organizationData[i]['name']=data[i].name;
+		      		organizationData[i]['id']=id;
+	      		}
+	      	}
+	      
+	      	organizations.organizationsTestDataArray=organizationData;
+	      console.log(organizationData);
+		}
+
+
 
 
 }]);

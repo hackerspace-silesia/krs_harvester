@@ -3,13 +3,19 @@
 angular.module('Data')
   .factory('organizationsData', function (Restangular) {
   return {
-        getData: function() 
+        getDataCompareToPartOfName: function(name) 
         {          
             
-        var baseAccounts = Restangular.all('organizations');
+          var base = Restangular.all('organizations');
+          
+          return base.getList({search:name});
 
-        return baseAccounts.getList();
-  
+        },
+        getOneOrganization: function(id)
+        {
+           var organization = Restangular.all('organizations/'+id);
+
+          return organization.getList();
         }
     };
   });

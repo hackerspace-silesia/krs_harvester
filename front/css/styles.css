@@ -6,18 +6,28 @@
   h3 {
        color:#f4831e;
       font-family: 'Helvetica Neue', sans-serif; 
-      font-size: 50px; 
+      font-size: 30px; 
       font-weight: bold; 
       letter-spacing: -1px; 
       line-height: 1; 
       text-align: center; 
+
   }
+ .infoAboutMoney{
+  color:grey;
+  font-weight: 100;
+ }
   h4 {
       font-size: 19px;
       line-height: 1.375em;
       color: #303030;
       font-weight: 400;
       margin-bottom: 30px;
+  }
+
+  h2 {
+      color: orange;
+
   }
   canvas{
   	height: 100%;
@@ -26,16 +36,20 @@
   	width:100%;
   }
   .my-chart {
-width: 700px;
-height: 400px;
-}
-  .moneySum{
+  width: 700px;
+  height: 400px;
+  }
+ .moneySum{
   	font-size: 80px;
   }
   .tile{
   	 background-color: #f4831e;
   	 height: 250px;
   	 margin: 2px;
+     
+  }
+  .tile-container{
+    padding-top: 30px;
   }
   .moneyBar{
       font-family: Montserrat, sans-serif;
