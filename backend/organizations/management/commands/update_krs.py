@@ -11,7 +11,7 @@ class Command(BaseCommand):
          :return: tuple of list of objects and next url
          :rtype: (list, (str|None))
         """
-        session = session and requests.Session()
+        session = session or requests.Session()
         if url is None:
             req = session.get(URL, params={
                 'conditions[krs_podmioty.forma_prawna_typ_id]': '2',
