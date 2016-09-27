@@ -1,0 +1,9 @@
+    <input  list="organisation-name" ng-model="search.writings" ng-change="search.getData(data.writings)" 
+    		class="form-control"  placeholder="nazwa organizacji">
+
+     	<datalist id="organisation-name" >
+		  <option ng-model="search.organizationsTestDataArray"
+		  		  ng-repeat="organization in search.organizationsTestDataArray" 
+		  		  value = {{organization.name}}>
+		  </option>
+		</datalist>
