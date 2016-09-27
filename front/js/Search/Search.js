@@ -1,56 +1,49 @@
   angular.module('Data')
-  .controller('SearchCtr',['organizationsData','$location','$window',function ( organizationsData, $location,$window) 
+  .controller('SearchCtr',['organizationsData','$window',function ( organizationsData, $window) 
 {	
 	var search=this;
 
 	search.sum="557 563 428";
-	search.organizationsTestDataArray = {};
-	search.writings;
+	search.organizationsNames = {};
+	search.writings='';
 
+	search.checkIsWritingsCorrect=function(){
+	
+		if(isNameExist()){
 
-	search.showOrganizationData=function(){
+			showOrganizationPage(search.writings);
+		}
+		else
+		{
+			//TODO
+			alert('Nieprawidłowe dane');
+		}
+	}
 
-		let id = getId(search.writings);
+	showOrganizationPage = function(id){
 
-		$location.path('#/organisation/'+id+'/');
 		$window.location.assign('#/organisation/'+id+'/');
 	}
 
-	getId = function(name){
-		let organizationTest = search.organizationsTestDataArray;
-			
-		for(let i =0;i<10;i++){
-			console.log(organizationTest[i]);
-			if(organizationTest[i].name==name)
-			{
-				return organizationTest[i].id;
+	isNameExist = function(){	
+
+		for(let i = 0;i<10;i++){
+			if(search.organizationsNames[i].name==search.writings)
+			{console.log(search.writings);
+				return true;
 			}
-			return 0;
 		}
-
-	}
-
-	search.getName = function(id){
-		let organizationTest = search.organizationsTestDataArray;
-
-		for(let i =1;i<10;i++){
-			if(organizationTest[i].name=name)
-			{
-				return organizationTest[i].name;
-			}
-			return '';
-		}
-
+		return false;
 	}
 
 	search.getPropositionsOrganizations = function(){
 		organizationsData.getDataCompareToPartOfName(search.writings).then(function(data)	
-	    {	    	
-	    		getNamePropositionsOrganization(data);    		
+	    {console.log(search.writings);
+	    	search.organizationsNames =	getPropositionsOrganizationsNames(data);    		    	
 	    });
 	}
 
-	var getNamePropositionsOrganization = function (arrayOfObjectOrganisations)
+	var getPropositionsOrganizationsNames = function (arrayOfObjectOrganisations)
 	{	
 		let data = arrayOfObjectOrganisations;
 		let organizationData = {};
@@ -61,11 +54,8 @@
 		      		let id = data[i].pk;
 		      		organizationData[i]={'name':{}};
 		      		organizationData[i]['name']=data[i].name;
-		      		organizationData[i]['id']=id;
 	      		}
 	      	}
-	      
-	      	search.organizationsTestDataArray=organizationData;
-	      console.log(organizationData);
+	      	return organizationData;
 		}
 }]);
