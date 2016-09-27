@@ -43,9 +43,9 @@
 
 	}
 
-	search.getData = function(partOfName){
-		organizationsData.getDataCompareToPartOfName(partOfName).then(function(data)	
-	    {	    		console.log(partOfName);
+	search.getPropositionsOrganizations = function(){
+		organizationsData.getDataCompareToPartOfName(search.writings).then(function(data)	
+	    {	    	
 	    		getNamePropositionsOrganization(data);    		
 	    });
 	}

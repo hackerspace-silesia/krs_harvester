@@ -1,5 +1,8 @@
-    <input  list="organisation-name" ng-model="search.writings" ng-change="search.getData(data.writings)" 
-    		class="form-control"  placeholder="nazwa organizacji">
+    <input  list="organisation-name" 
+   			ng-model="search.writings" 
+    		ng-change="search.getPropositionsOrganizations()" 
+    		class="form-control"  
+    		placeholder="nazwa organizacji">
 
      	<datalist id="organisation-name" >
 		  <option ng-model="search.organizationsTestDataArray"
