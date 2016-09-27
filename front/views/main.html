@@ -1,20 +1,20 @@
-<div class="text-center" ng-controller="SearchCtr as data">
+<div class="text-center" ng-controller="SearchCtr as search">
   
     <h3><div class="moneySum"><span>{{data.sum}}<span>zł</div><div class='infoAboutMoney'> tyle dotacji otrzymały organizacje pozarządowe w 2015
     </div>
     </h3>
     <h2>Sprawdź jedną z nich:</h2>
-    <input  list="organisation-name" ng-model="data.writings" ng-change="data.getData(data.writings)" 
+    <input  list="organisation-name" ng-model="search.writings" ng-change="search.getData(data.writings)" 
     		class="form-control"  placeholder="nazwa organizacji">
 
      	<datalist id="organisation-name" >
-		  <option ng-model="data.organizationsTestDataArray"
-		  		  ng-repeat="organization in data.organizationsTestDataArray" 
+		  <option ng-model="search.organizationsTestDataArray"
+		  		  ng-repeat="organization in search.organizationsTestDataArray" 
 		  		  value = {{organization.name}}>
 		  </option>
 		</datalist>
 
-     <button type="button" ng-click="data.showOrganizationData(writings)" class="btn btn-warning btn-block">Szukaj
+     <button type="button" ng-click="search.showOrganizationData(writings)" class="btn btn-warning btn-block">Szukaj
      </button>
 
 
