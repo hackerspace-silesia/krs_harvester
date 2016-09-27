@@ -18,7 +18,7 @@ class DonationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Donation
-        fields = ('name', 'money', 'organization', 'donator')
+        fields = ('name', 'money', 'organization', 'donator', 'date', 'with_day', 'with_month')
 
 
 class DonationAggSerializer(serializers.Serializer):
