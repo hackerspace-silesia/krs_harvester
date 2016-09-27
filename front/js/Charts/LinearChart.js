@@ -2,7 +2,7 @@ angular.module('Data', ['chart.js'])
 .controller("LineCtrlOrganization", function ($scope, $routeParams,organizationsData) {
 
 var line = this;
-$scope.actualId = $routeParams.name;
+line.actualId = $routeParams.name;
 
 $scope.actualName;
 		
@@ -20,37 +20,13 @@ line.organizationNameId={};
   };
   
 
-  var getDataOrganisations = function(){
-		organizationsData.getDataCompareToPartOfName().then(function(data)	
-	    {	let organizationData = {};
-	      	for(let i=1;i<11;i++){
-	      		let id = data[i].pk;
-	      		organizationData[i]={'name':{}};
-	      		organizationData[i]['name']=data[i].name;
-	      		organizationData[i]['id']=id;
-	      	}
-	     	line.organizationNameId = organizationData;	
-	     	$scope.actualName=getName();
+  var getDataOrganisation = function(id){
+		organizationsData.getOne(id).then(function(data)	{
+	    $scope.actualName =data.name;
 	    });
 
 	};
-	getDataOrganisations();
-	var getName = function(){
-		let organizationTest = line.organizationNameId;
-
-		for(let i =1;i<10;i++){
-
-
-			if(organizationTest[i].id=$scope.actualId)
-			{	console.log(organizationTest[i].name);
-				return organizationTest[i].name;
-			}
-			return '';
-		}
-
-	}
-
-
+	
   function changeData(a,b,c,d,e){
 		let data = [a,b,c,d,e];
 		$scope.data = data;
@@ -75,6 +51,13 @@ elements: { line: {tension: 0} },
       ]
     }
   };
+
+
+  var init = function(){
+  getDataOrganisation(line.actualId);
+}
+
+init();
 });
 
 

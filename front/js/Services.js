@@ -12,11 +12,10 @@ angular.module('Data')
           return base.getList({search:name});
 
         },
-        getOneOrganizationSpecificData: function(id)
+        getOne: function(id)
         {
-           let organization = Restangular.all('organizations/'+id);
-
-          return organization.getList();
+           let organization = Restangular.one('organizations/'+id);
+          return organization.get();
         }
     };
   });
