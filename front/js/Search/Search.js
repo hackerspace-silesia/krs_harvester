@@ -9,9 +9,9 @@
 
 	search.checkIsWritingsCorrect=function(){
 	
-		if(isNameExist()){
+		if(getIdIfExist()){
 
-			showOrganizationPage(search.writings);
+			showOrganizationPage(getIdIfExist());
 		}
 		else
 		{
@@ -25,12 +25,12 @@
 		$window.location.assign('#/organisation/'+id+'/');
 	}
 
-	var isNameExist = function(){	
+	var getIdIfExist = function(){	
 
 		for(let i = 0;i<10;i++){
 			if(search.organizationsNames[i].name==search.writings)
 			{
-				return true;
+				return search.organizationsNames[i].id;
 			}
 		}
 		return false;
@@ -54,6 +54,8 @@
 		      		let id = data[i].pk;
 		      		organizationData[i]={'name':{}};
 		      		organizationData[i]['name']=data[i].name;
+		      		organizationData[i]['id']=id;
+
 	      		}
 	      	}
 	      	return organizationData;
