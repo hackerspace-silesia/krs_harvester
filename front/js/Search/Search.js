@@ -20,12 +20,12 @@
 		}
 	}
 
-	showOrganizationPage = function(id){
+	var showOrganizationPage = function(id){
 
 		$window.location.assign('#/organisation/'+id+'/');
 	}
 
-	isNameExist = function(){	
+	var isNameExist = function(){	
 
 		for(let i = 0;i<10;i++){
 			if(search.organizationsNames[i].name==search.writings)
