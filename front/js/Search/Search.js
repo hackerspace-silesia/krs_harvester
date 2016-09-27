@@ -29,7 +29,7 @@
 
 		for(let i = 0;i<10;i++){
 			if(search.organizationsNames[i].name==search.writings)
-			{console.log(search.writings);
+			{
 				return true;
 			}
 		}
@@ -38,7 +38,7 @@
 
 	search.getPropositionsOrganizations = function(){
 		organizationsData.getDataCompareToPartOfName(search.writings).then(function(data)	
-	    {console.log(search.writings);
+	    {
 	    	search.organizationsNames =	getPropositionsOrganizationsNames(data);    		    	
 	    });
 	}
